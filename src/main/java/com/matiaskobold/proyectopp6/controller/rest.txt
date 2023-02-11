@@ -1,0 +1,82 @@
+CHARACTER:
+
+GET localhost:8080/characters
+
+GET localhost:8080/character/1
+
+POST localhost:8080/character
+    {
+    "player_username":"matias",
+    "name":"Gimli",
+    "player_discord":"@mkobold",
+    "age":139,
+    "race":"dwarf",
+        "home":{
+            "address":"Thorin's Halls",
+            "city":"Blue Mountains",
+            "country":"Eriador"
+        }
+    }
+
+PUT localhost:8080/character
+    {
+        "id":1
+        "player_username":"matias",
+        "name":"Gimli",
+        "player_discord":"@mkobold",
+        "age":139,
+        "race":"dwarf",
+            "home":{
+                "address":"Thorin's Halls",
+                "city":"Blue Mountains",
+                "country":"Eriador"
+            }
+        }
+DELETE localhost:8080/character/1
+
+HOMES:
+
+POST localhost:8080/home
+    {
+         "address":"Martina Cespedes 1850",
+         "city":"Buenos Aires",
+         "country":"Argentina"
+    }
+
+PUT localhost:8080/home
+    {
+             "id":3,
+             "address":"Martina Cespedes 1850",
+             "city":"Buenos Aires",
+             "country":"Argentina"
+    }
+
+CHARACTER_HOME:
+
+POST localhost:8080/character/1/home     create or update home for a character
+
+    {
+             "address":"Martina Cespedes 1850",
+             "city":"Buenos Aires",
+             "country":"Argentina"
+    }
+
+DELETE localhost:8080/character/1/home   delete home of a character
+
+PUT localhost:8080/character/{idC}/home/{idH}   adds existing home {idH} to existing character {idC}
+
+CLANS Y SONGS:
+X POST	/clans/:id/song	    create new Song for a Clan
+X GET	    /clans/:id/song	    retrieve all Songs of a Clan
+X GET	    /song/:id	        retrieve a Song by :id
+x PUT	    /song/:id	        update a Song by :id
+x DELETE	/song/:id	        delete a Song by :id
+x DELETE	/clans/:id	        delete a Clan (and its Songs) by :id
+DELETE	/clans/:id/song	    delete all Songs of a Clan
+
+
+NOTAS:
+//Clans tiene ResponseEntity<?> return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron clanes persistidos");
+                                                                                                                } esto esta muy bueno para hacer el body y el status.
+Le falta validacion de campos y cambiar los responsestatus y responsebody dependiendo el caso, siempre poner ResponseEntity<?> y listo
+Le falta poner los links href como dice la documentacion que debe tener una rest api, ver la documentacion de rest api de springboot
