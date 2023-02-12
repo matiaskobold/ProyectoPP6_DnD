@@ -61,5 +61,6 @@ public class ClanService {
 
     public void deleteAll(){
         clanRepository.deleteAll();
+
     }
 }
