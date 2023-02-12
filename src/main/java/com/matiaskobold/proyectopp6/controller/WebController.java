@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class WebController {
+
 /*
     @Autowired
     CharacterRepository characterRepository;
