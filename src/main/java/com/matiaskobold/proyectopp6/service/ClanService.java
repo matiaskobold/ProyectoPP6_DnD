@@ -33,7 +33,7 @@ public class ClanService {
 
 
     public ResponseEntity<Clan> createClan(Clan clan) {
-        return new ResponseEntity<>(clanRepository.save(clan), HttpStatus.OK);
+        return new ResponseEntity<>(clanRepository.save(clan), HttpStatus.CREATED);
     }
 
     public ResponseEntity<Clan> updateClan(Long id, Clan oldClan) {
@@ -57,5 +57,9 @@ public class ClanService {
         else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    public void deleteAll(){
+        clanRepository.deleteAll();
     }
 }
