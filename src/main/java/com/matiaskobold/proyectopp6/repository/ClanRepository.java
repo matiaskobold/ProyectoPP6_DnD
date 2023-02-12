@@ -10,4 +10,5 @@ import java.util.List;
 
 @Repository
     public interface ClanRepository extends JpaRepository<Clan, Long> {
+        void deleteAll();
 }
