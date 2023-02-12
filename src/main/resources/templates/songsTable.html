@@ -37,7 +37,8 @@
             <td th:text="${song.clasification}"></td>
             <td th:text="${song.participants}"></td>
             <td th:text="${song.getClan().getName()}"></td>
-
+            <td><a th:href="@{showSongFormForUpdate/{id}(id=${song.id})}" class="btn btn-secondary">Update</a>
+                <a th:href="@{deleteSong/{id}(id=${song.id})}" class="btn btn-danger">Delete</a> </td>
         </tr>
         </thead>
         <tbody>
