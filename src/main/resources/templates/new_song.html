@@ -11,7 +11,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>New song</title>
 </head>
 <body>
 <div class="container-sm">
@@ -22,7 +22,8 @@
     <input type="text" th:field="*{description}" th:required="required" placeholder="Song's Description" class="form-control mb-4 col-4">
     <input type="text" th:field="*{clasification}" th:required="required" placeholder="Song's Clasification" class="form-control mb-4 col-4">
     <input type="number" th:field="*{participants}" th:required="required" placeholder="User's mail address" class="form-control mb-4 col-4">
-    <select th:field="*{clan}" class="form-control">
+    <select th:field="*{clan}" class="form-control">+
+
       <option th:each="clan: ${listClans}" th:value="${clan.id}" th:text="${clan.name}"></option>
     </select>
     <button type="submit" class="btn btn-primary" id="submit">Save New Song</button>
