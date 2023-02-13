@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <title>Clans Table</title>
+</head>
+<body>
+
+<div class="container-sm">
+    <a th:href="@{/showNewClanForm}" class="btn btn-primary">Add Clan</a>
+    <h1>Clans list</h1>
+    <table class="table table-sm table-hover table-dark">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Main language</th>
+            <th scope="col">Operation's base</th>
+            <th scope="col">Title</th>
+            <th>Actions</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr th:each="clan:${listClans}">
+            <td th:text="${clan.id}"></td>
+            <td th:text="${clan.name}"></td>
+            <td th:text="${clan.description}"></td>
+            <td th:text="${clan.main_language}"></td>
+            <td th:text="${clan.operations_base}"></td>
+            <td th:text="${clan.title}"></td>
+            <td><a th:href="@{showClanFormForUpdate/{id}(id=${clan.id})}" class="btn btn-secondary">Update</a>
+                <a th:href="@{deleteClan/{id}(id=${clan.id})}" class="btn btn-danger">Delete</a></td>
+
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+</body>
+</html>

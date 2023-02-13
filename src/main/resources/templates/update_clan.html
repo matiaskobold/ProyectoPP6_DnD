@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Update clan</title>
+</head>
+<body>
+<div class="container-sm">
+  <h1>Update Clan</h1>
+  <hr>
+
+  String name, String description, String main_language, String operations_base, String title
+  <form action="#" th:action="@{/saveClan}" th:object="${clan}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <input type="text" th:field="*{name}" th:required="required" placeholder="Clan's new name" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{description}" th:required="required" placeholder="Clan's new description" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{main_language}" th:required="required" placeholder="Clan's new main language" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{operations_base}" th:required="required" placeholder="Clan's new operation's base" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{title}" placeholder="Clan's new title" class="form-control mb-4 col-4">
+    <button type="submit" class="btn btn-primary">Update Clan</button>
+  </form>
+
+
+</div>
+</body>
+</html>
