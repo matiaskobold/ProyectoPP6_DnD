@@ -5,8 +5,10 @@ import com.matiaskobold.proyectopp6.service.ClanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 /*
 As you are using Spring Boot web, Jackson dependency is implicit and we do not have to define explicitly.
@@ -35,18 +37,18 @@ public class RestClanController {
     }
 
     @PostMapping("/clans")
-    public ResponseEntity<Clan> createClan(@RequestBody Clan clan)  {
+    public ResponseEntity<Clan> createClan(@RequestBody @Valid Clan clan)  {
        return clanService.createClan(clan);
 
     }
     @PutMapping("/clans/{id}")
-    public ResponseEntity<Clan> updateClan(@PathVariable(value="id") Long id, @RequestBody Clan clan){
+    public ResponseEntity<Clan> updateClan(@PathVariable(value="id") Long id, @RequestBody @Valid Clan clan){
         return clanService.updateClan(id, clan);
 
     }
 
     @DeleteMapping("/clans/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") Long id) {
+    public ResponseEntity<String> deleteClanById(@PathVariable("id") Long id) {
         return clanService.deleteById(id);
     }
 

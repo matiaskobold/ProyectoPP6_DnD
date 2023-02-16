@@ -1,6 +1,7 @@
 package com.matiaskobold.proyectopp6.service;
 
 import com.matiaskobold.proyectopp6.exception.ResourceNotFoundException;
+import com.matiaskobold.proyectopp6.model.Character;
 import com.matiaskobold.proyectopp6.model.Clan;
 import com.matiaskobold.proyectopp6.repository.ClanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,14 @@ public class ClanService {
         }
         else {
 
-            return new ResponseEntity<>(clanRepository.findAll(), HttpStatus.OK);
+            return new ResponseEntity<>(clanRepository.findAll(), HttpStatus.FOUND);
         }
     }
 
 
     public ResponseEntity<Clan> getClanById(Long id) throws ResourceNotFoundException{
         Clan clan = clanRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Clan not found for this id: "+id));
-        return ResponseEntity.ok().body(clan);
+        return ResponseEntity.status(HttpStatus.FOUND).body(clan);
     }
 
 
@@ -49,15 +50,13 @@ public class ClanService {
 
     }
 
-    public ResponseEntity<HttpStatus> deleteById(Long id) {
-        if (clanRepository.existsById(id)){
-            clanRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        }
-        else{
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> deleteById(Long id) {
+        Clan clan = clanRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Clan with id "+id+" not found!"));
+        clanRepository.deleteById(id);
+        return ResponseEntity.ok().body("Clan deleted!");
     }
+
 
     public void deleteAll(){
         clanRepository.deleteAll();

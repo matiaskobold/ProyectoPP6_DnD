@@ -6,6 +6,7 @@ import com.matiaskobold.proyectopp6.model.Home;
 import com.matiaskobold.proyectopp6.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,7 +19,7 @@ public class RestHomeController {
     HomeService homeService;
 
     @GetMapping("/homes")
-    public List<Home> listAllHomes() {
+    public ResponseEntity<?> listAllHomes() {
         return homeService.findAll();                                  //en MAVEN por SpringBoot ya está puesto el Jackson, que es el que te convierte a JSON
     }
     @PostMapping("/home")

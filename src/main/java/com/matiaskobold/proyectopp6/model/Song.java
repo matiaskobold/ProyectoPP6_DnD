@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.Optional;
 
 @Entity
@@ -25,6 +26,7 @@ public class Song {
     private String clasification;
 
     @Column(nullable=false)
+    @Min(value = 1)
     private int participants;
 
     @ManyToOne

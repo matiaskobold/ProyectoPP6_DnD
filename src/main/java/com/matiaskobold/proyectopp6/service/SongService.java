@@ -1,6 +1,7 @@
 package com.matiaskobold.proyectopp6.service;
 
 import com.matiaskobold.proyectopp6.exception.ResourceNotFoundException;
+import com.matiaskobold.proyectopp6.model.Character;
 import com.matiaskobold.proyectopp6.model.Clan;
 import com.matiaskobold.proyectopp6.model.Song;
 import com.matiaskobold.proyectopp6.repository.ClanRepository;
@@ -24,25 +25,26 @@ public class SongService {
 
     public ResponseEntity<List<Song>> getAllSongsByClanId(Long clanId) {
         if (!clanRepository.existsById(clanId)){
-            throw new ResourceNotFoundException("Not found clan with id"+clanId);
+            throw new ResourceNotFoundException("Clan not found with id: "+clanId);
         }
         else{
             List<Song> songs = songRepository.findByClanId(clanId);
-            return new ResponseEntity<>(songs, HttpStatus.OK);
+            return new ResponseEntity<>(songs, HttpStatus.FOUND);
         }
     }
 
     public ResponseEntity<Song> getSongById(Long id) {
         Song song = songRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Didn't found Song with Id: "+id));
-        return new ResponseEntity<>(song, HttpStatus.OK);
+        return new ResponseEntity<>(song, HttpStatus.FOUND);
 
     }
 
 
-    public Song createSong(Long clanId, Song song) {
+    public ResponseEntity<Song> createSong(Long clanId, Song song) {
        return clanRepository.findById(clanId).map(clan -> {
            song.setClan(clan);
-           return songRepository.save(song);
+           songRepository.save(song);
+           return new ResponseEntity<>(song, HttpStatus.CREATED);
        }).orElseThrow(()->new ResourceNotFoundException("Clan id "+clanId+" not found"));
     }
 
@@ -56,15 +58,14 @@ public class SongService {
         return songRepository.save(songUpd);
     }
 
-    public ResponseEntity<HttpStatus> deleteSongById(Long id) {
-        if (songRepository.existsById(id)){
+    public ResponseEntity<String> deleteSongById(Long id) {
+
+
+            Song song = songRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Song with id "+id+" not found!"));
             songRepository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body("Song deleted!");
         }
-        else{
-            return ResponseEntity.notFound().build();
-        }
-    }
 
 
     public ResponseEntity<?> deleteAllSongsByClanId(Long id) {

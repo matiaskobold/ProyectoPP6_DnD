@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController //Me dice que cada return debe ser llevado a un responseBody en vez
+
 public class RestCharacterController {
 
     //el characterRepository no lo deberia usar, deberia usar el service.
@@ -23,7 +24,7 @@ public class RestCharacterController {
     CharacterService characterService;
 
     @GetMapping("/characters")
-    public List<Character> listAllCharacters() {
+    public ResponseEntity<?> listAllCharacters() {
         return characterService.findAll();                                  //en MAVEN por SpringBoot ya está puesto el Jackson, que es el que te convierte a JSON
     }
 
@@ -35,7 +36,7 @@ public class RestCharacterController {
 
 
     @PostMapping("/character")
-    public ResponseEntity<?> newCharacter(@RequestBody @Valid Character newCharacter) {    //RequestBody me sirve para agarrar el body si lo mando como raw data en json.
+    public ResponseEntity<?> newCharacter(@RequestBody Character newCharacter) {    //RequestBody me sirve para agarrar el body si lo mando como raw data en json.
 
         return characterService.save(newCharacter);
     }

@@ -6,8 +6,10 @@ import com.matiaskobold.proyectopp6.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,18 +29,18 @@ public class RestSongController {
     }
 
     @PostMapping("/clans/{id}/songs")
-    public Song createSong(@PathVariable(value = "id") Long clanId,
+    public ResponseEntity<Song> createSong(@PathVariable(value = "id") Long clanId, @Valid
                                            @RequestBody Song song) {
         return songService.createSong(clanId, song);
     }
 
     @PutMapping("/song/{id}")
-    public Song updateSongById(@PathVariable(value="id") Long id, @RequestBody Song song){
+    public Song updateSongById(@PathVariable(value="id") Long id, @Valid @RequestBody Song song){
         return songService.updateSongById(id, song);
     }
 
     @DeleteMapping("/song/{id}")
-    public ResponseEntity<HttpStatus> deleteSongById(@PathVariable(value="id") Long id){
+    public ResponseEntity<String> deleteSongById(@PathVariable(value="id") Long id){
         return songService.deleteSongById(id);
     }
 

@@ -41,6 +41,8 @@ public class AppSecurityConfigController {
                 .antMatchers("/clans").permitAll()
                 .antMatchers("/clans/{id}").permitAll()
                 .antMatchers("/home").permitAll()
+                .antMatchers("/homes").permitAll()
+                .antMatchers("/home/{id}").permitAll()
                 .antMatchers("/clans/{id}/songs").permitAll()
                 .antMatchers("/songs/{id}").permitAll()
                 .antMatchers("/song/{id}").permitAll()

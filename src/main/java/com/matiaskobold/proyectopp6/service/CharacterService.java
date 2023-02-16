@@ -33,9 +33,16 @@ public class CharacterService {
         return ResponseEntity.status(HttpStatus.CREATED).body("Character created at: "+location);
     }
 
-    public List<Character> findAll() {
-        return characterRepository.findAll();
-    }
+    public ResponseEntity<?> findAll() {
+            if (characterRepository.count()==0){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron characters persistidos");
+            }
+            else {
+
+                return new ResponseEntity<>(characterRepository.findAll(), HttpStatus.OK);
+            }
+        }
+
 
     public ResponseEntity<Character> findOneCharacter(Long id) {
         Character character = characterRepository.findById(id)

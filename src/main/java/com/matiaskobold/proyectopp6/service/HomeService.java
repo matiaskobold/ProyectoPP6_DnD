@@ -18,8 +18,15 @@ public class HomeService {
 
     @Autowired
     private HomeRepository homeRepository;
-    public List<Home> findAll() {
-        return homeRepository.findAll();
+    public ResponseEntity<?> findAll() {
+
+        if (homeRepository.count()==0){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron homes persistidas");
+        }
+            else {
+
+            return new ResponseEntity<>(homeRepository.findAll(), HttpStatus.OK);
+        }
     }
     public ResponseEntity<Home> saveHome(Home home){
         Home homeC = homeRepository.save(home);
