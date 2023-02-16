@@ -35,8 +35,7 @@ public class Songs {
     public String showNewUserForm(Model model){
         //Create model attribute to bind next form data (in new_user.html)
         if (clanRepository.findAll().isEmpty()){
-            //String errorMessage = "No se han creado clanes, cree un clan primero para luego agregar un usuario.";
-            //model.addAttribute("errorMessage", errorMessage);
+
             return "redirect:/showNewClanForm";
         }
         else {

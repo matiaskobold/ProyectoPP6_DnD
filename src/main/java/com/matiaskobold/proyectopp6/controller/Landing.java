@@ -65,20 +65,8 @@ public class Landing {
         int numberOfNews=3;
         int maxLengthOfNews=1000000;
         String formatResponse="json";
-/*
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("appid",gameSteamID);
-        map.add("count", numberOfNews);
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map,headers);
 
-        ResponseEntity<String> responseStr = restTemplate.getForEntity(
-                "http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/",
-                String.class,
-                request);
 
- */
         ResponseEntity<String> responseStr=restTemplate.getForEntity("http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?"+
                         "appid="+gameSteamID+
                         "&count="+numberOfNews+
@@ -89,7 +77,7 @@ public class Landing {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode root = objectMapper.readTree(responseStr.getBody());
         List<SteamNews> steamNews = new ArrayList<>();
-        List<String> newsLinks = new ArrayList<>();
+
         for (int i=0; i<numberOfNews;i++) {
             String title = root.get("appnews").get("newsitems").get(i).get("title").asText();
             String contents = root.get("appnews").get("newsitems").get(i).get("contents").asText();
@@ -99,12 +87,10 @@ public class Landing {
 
         }
 
-
-
         model.addAttribute("steamNews", steamNews);
         model.addAttribute("game", gameSteamID);
-        // System.out.println(responseStr.getBody());
-        return "publicApi";
+
+        return "publicApi.html";
     }
 
 }
