@@ -2,9 +2,12 @@ package com.matiaskobold.proyectopp6.controller;
 
 import com.matiaskobold.proyectopp6.model.Character;
 import com.matiaskobold.proyectopp6.model.Home;
+import com.matiaskobold.proyectopp6.model.assembler.CharacterAssembler;
 import com.matiaskobold.proyectopp6.repository.CharacterRepository;
 import com.matiaskobold.proyectopp6.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +26,16 @@ public class RestCharacterController {
     @Autowired
     CharacterService characterService;
 
+    @Autowired
+    CharacterAssembler characterAssembler;
+
     @GetMapping("/characters")
-    public ResponseEntity<?> listAllCharacters() {
+    public CollectionModel<EntityModel<Character>> listAllCharacters() {
         return characterService.findAll();                                  //en MAVEN por SpringBoot ya está puesto el Jackson, que es el que te convierte a JSON
     }
 
     @GetMapping("/character/{id}")
-    public ResponseEntity<Character> findOneCharacter(@PathVariable("id") Long id) {
+    public EntityModel<Character> findOneCharacter(@PathVariable("id") Long id) {
 
         return characterService.findOneCharacter(id);
     }
