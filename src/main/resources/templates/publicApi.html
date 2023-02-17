@@ -18,16 +18,23 @@
 
 <div class="container-sm">
 
-    <h1>Steam news for:  </h1> <h1 th:text="${game}"></h1>
-    <ul th:each="news: ${steamNews}">
-        <li th:text="${news.title}"></li>
-        <li th:text="${news.contents}"></li>
-        <li th:text="${news.author}"></li>
-        <li th:text="${news.url}"></li>
+    <h1>Steam news for Baldur's Gate 3</h1>
+    <h1 th:text="${game}"></h1>
+
+    <ul class="list-group"
+            th:each="news: ${steamNews}">
+        <li class="list-group-item active" th:text="${news.title}"></li>
+        <li class="list-group-item" th:text="${news.contents}"></li>
+        <i><b><li class="list-group-item" th:text="${news.author}"></li></b></i>
+        <a th:href="${news.url}">Link! </a>
+
+        <p></p>
+        <p></p>
     </ul>
 
+    <a href="/" class="btn btn-primary">Go home</a>
 </div>
 
-<a href="/">go home</a>
+
 </body>
 </html>
