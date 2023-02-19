@@ -26,14 +26,18 @@
         <input type="text" th:field="*{clasification}" th:required="required" placeholder="Song's new clasification"
                class="form-control mb-4 col-4">
         <input type="number" th:field="*{participants}" th:required="required" placeholder="Song's new participants"
-               class="form-control mb-4 col-4">
+               class="form-control mb-4 col-4" min="1">
         <select th:field="*{clan}" class="form-control" th:required="required">
             <option th:each="clan: ${listClans}" th:value="${clan.id}" th:text="${clan.name}"></option>
         </select>
+        <p>
 
+        </p>
         <button type="submit" class="btn btn-primary">Update Song</button>
     </form>
-
+    <p>
+    </p>
+    <a href="/" class="btn btn-primary">Go home</a>
 
 </div>
 </body>

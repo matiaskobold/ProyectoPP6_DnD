@@ -22,7 +22,7 @@ public class RestHomeController {
     public ResponseEntity<?> listAllHomes() {
         return homeService.findAll();                                  //en MAVEN por SpringBoot ya está puesto el Jackson, que es el que te convierte a JSON
     }
-    @PostMapping("/home")
+    @PostMapping("/homes")
     public ResponseEntity<Home> newHome(@RequestBody @Valid Home newHome){
         return homeService.saveHome(newHome);
     }
@@ -32,7 +32,7 @@ public class RestHomeController {
         return homeService.findAll();
     }
 */
-    @PutMapping("/home/{id}")
+    @PutMapping("/homes/{id}")
     public ResponseEntity<Home> updateHome(@RequestBody @Valid Home newHome, @PathVariable("id") Long id){
         return homeService.updateHome(newHome, id);
     }

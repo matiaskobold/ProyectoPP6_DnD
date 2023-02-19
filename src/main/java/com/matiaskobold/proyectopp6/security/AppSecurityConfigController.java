@@ -47,6 +47,13 @@ public class AppSecurityConfigController {
                 .antMatchers("/songs/{id}").permitAll()
                 .antMatchers("/song/{id}").permitAll()
 
+
+                //TESTING
+
+                .antMatchers("/publicAPI").permitAll()
+                //
+
+
                 //PermitAll without authentication newUsers
                 .antMatchers("/newUser").permitAll()
                 .antMatchers("/saveUser").permitAll()

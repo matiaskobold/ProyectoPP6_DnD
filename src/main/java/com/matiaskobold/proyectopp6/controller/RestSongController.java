@@ -34,12 +34,12 @@ public class RestSongController {
         return songService.createSong(clanId, song);
     }
 
-    @PutMapping("/song/{id}")
+    @PutMapping("/songs/{id}")
     public Song updateSongById(@PathVariable(value="id") Long id, @Valid @RequestBody Song song){
         return songService.updateSongById(id, song);
     }
 
-    @DeleteMapping("/song/{id}")
+    @DeleteMapping("/songs/{id}")
     public ResponseEntity<String> deleteSongById(@PathVariable(value="id") Long id){
         return songService.deleteSongById(id);
     }

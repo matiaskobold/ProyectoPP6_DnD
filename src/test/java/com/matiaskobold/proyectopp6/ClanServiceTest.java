@@ -74,7 +74,7 @@ public class ClanServiceTest {
         Clan clan1 = new Clan("The stonemasons", "Clan of stonemasons from Karak Peaks", "Dwarfish", "Karak Peaks", "Royal Stonemasons");
         clanService.createClan(clan1);
         ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:"+port+"/clans", String.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND);
         assertThat(response.getBody()).isEqualTo("["+objectMapper.writeValueAsString(clan1)+"]");
 
     }
@@ -93,9 +93,7 @@ public class ClanServiceTest {
                 postForEntity("http://localhost:" + port + "/clans", request, String.class);
 
         assertThat(response.getStatusCode())
-                .isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);       //TODO: CAMBIAR ESTO!!! NO DEFBERIA TIRAR INTERNAL_SERVER_ERROR. CUSTOM EXCEPTION HANDLER! https://devwithus.com/exception-handling-spring-boot-rest-api/
-                                                                    //TODO: ESTO DEBERIA SER ASI PARA TODAS LAS API CALLS.
-                                                                    //TODO: LAS API CALLS DEBEN TIRAR UN BUEN EXCEPTION SIEMPRE QUE ESTA MAL VALIDADO. FIJARSE EL @VALID EN TODOS LOS CAMPOS
+                .isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     @Test
