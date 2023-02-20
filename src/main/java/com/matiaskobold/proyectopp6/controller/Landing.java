@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class Landing {
@@ -28,6 +30,9 @@ public class Landing {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserRepository userRepository;
 
     @RequestMapping("/")
     public String home(Model model){
@@ -53,8 +58,14 @@ public class Landing {
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user){
-        //Save userLogin to DB
+    public String saveUser(@ModelAttribute("user") User user, BindingResult bindingResult){
+
+        if(userRepository.existsByUsername(user.getUsername())){
+            bindingResult.rejectValue("username", "error.userName", "This username is already in use!!!");
+            System.out.println("No se guardo el usuario");
+            return "newUser.html";
+        }
+
         userService.saveUser(user);
         return "redirect:/";
     }
