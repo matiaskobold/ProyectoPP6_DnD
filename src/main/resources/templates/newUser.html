@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -14,12 +12,22 @@
   <title>New User</title>
 </head>
 <body>
+
+
+
+
 <div class="container-sm">
   <h1>New User</h1>
   <hr>
 
+  <div class="col-sm-4">
+    <span class="text-danger" th:errors="*{user.username}"> </span>
+  </div>
+
   <form action="#" th:action="@{/saveUser}" th:object="${user}" method="post">
-    <input type="text" th:field="*{username}" th:required="required" placeholder="New username" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{username}"  th:required="required" placeholder="New username" class="form-control mb-4 col-4">
+
+
     <input type="password" th:field="*{password}" th:required="required" placeholder="New password" class="form-control mb-4 col-4">
 
     <button type="submit" class="btn btn-primary">Save New User Login (account)</button>
